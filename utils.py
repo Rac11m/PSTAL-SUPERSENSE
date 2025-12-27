@@ -37,3 +37,16 @@ def token_alignment(input_sent, input_upos, tok_sent, emb_sent):
         word_emb[word] = emb_sent[tok].mean(dim=0)
     
     return tok_alignment, word_emb
+
+
+def get_pairs(in_file, emb_alignment):
+    pairs = []
+    for i, sent in enumerate(parse_incr(open(in_file, encoding='UTF-8'))):
+        for idx, tok in enumerate(sent):   
+            if tok["upos"] in ["NOUN", "NUM", "PROPN"]:
+                pairs.append((emb_alignment[i][idx], tok["frsemcor:noun"]))
+    return pairs
+
+def create_dataloader(dataset, batch_size, shuffle_mode):
+    from torch.utils.data import DataLoader
+    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle_mode)
