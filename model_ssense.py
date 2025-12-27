@@ -1,17 +1,6 @@
 import torch 
 import torch.nn as nn
 
-'''
-* Le classifieur MLP: composé de une ou plusieurs couches linéaires (nn.Linear) suivies de fonctions d’activation
-non-linéaires (p.ex. nn.ReLu). 
-
-* La première couche dense prend en entrée l’embedding contextuel du mot à classifier.
-    ** Sa dimension dépend du modèle pré-entraîné utilisé (camembert, distilbert, . . .) et peut être obtenue avec config.hidden_size. 
-* La dernière couche aura comme fonction d’activation le softmax (implicite, comme d’habitude).
-
-
----- Il n’est pas nécessaire de faire du padding comme on ferait dans RNN.
-'''
 
 class SUPERSENSE_model(nn.Module):
     def __init__(self, emb_dim, output_size):
